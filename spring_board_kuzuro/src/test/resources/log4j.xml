@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.board.kuzuro">
+	<logger name="com.spring.kuzuro">
 		<level value="info" />
 	</logger>
 	
