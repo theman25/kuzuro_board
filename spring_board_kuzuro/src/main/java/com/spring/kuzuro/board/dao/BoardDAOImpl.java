@@ -19,9 +19,15 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 게시물 목록
 	@Override
-	public List<BoardVO> getBoardList() {
+	public List<BoardVO> getBoardList() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".list");
+	}
+	// 게시물 작성
+	@Override
+	public void writeBoard(BoardVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace + ".write", vo);
 	}
 
 }

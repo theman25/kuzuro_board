@@ -17,9 +17,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시물 목록
 	@Override
-	public List<BoardVO> getBoardList() {
+	public List<BoardVO> getBoardList() throws Exception{
 		
 		return boardDao.getBoardList();
+	}
+	// 게시물 작성
+	@Override
+	public void writeBoard(BoardVO vo) throws Exception{
+		boardDao.writeBoard(vo);
+		
 	}
 
 }

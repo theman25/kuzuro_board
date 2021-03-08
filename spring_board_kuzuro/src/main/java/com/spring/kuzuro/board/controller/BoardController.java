@@ -19,12 +19,25 @@ public class BoardController {
 	@Inject
 	private BoardService boardService;
 	
+	// 게시물 목록
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String getList(Model model) throws Exception {
-		List<BoardVO> boardList;
+	public void getBoardList(Model model) throws Exception {
+		List<BoardVO> boardList = null;
 		boardList = boardService.getBoardList();
-		System.out.println("boardList : " + boardList.get(0).getContent());
 		model.addAttribute("boardList", boardList);
-		return "board/list";
+		//return "board/list";
+	}
+	
+	// 게시물 작성 화면 이동
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public void getBoardWrite() throws Exception{
+		
+	}
+	
+	// 게시물 작성
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String insertBoard(BoardVO vo) throws Exception {
+		boardService.writeBoard(vo);
+		return "redirect:/board/list";
 	}
 }
