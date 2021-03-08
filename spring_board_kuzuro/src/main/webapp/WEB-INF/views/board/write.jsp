@@ -6,7 +6,7 @@
 <title>게시물 작성</title>
 </head>
 <body>
-	<form method="post" action="">
+	<form method="post">
 		<table>
 			<tr>
 				<td><label>제목</label></td>

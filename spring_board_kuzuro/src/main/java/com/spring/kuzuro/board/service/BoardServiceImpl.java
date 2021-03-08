@@ -32,5 +32,15 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.getBoard(bno);
 	}
+	// 조회수 증가
+	@Override
+	public void updateViewCnt(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		boardDao.updateViewCnt(bno);
+	}
+	// 게시물 수정
+	public void modifyBoard(BoardVO vo) throws Exception{
+		boardDao.modifyBoard(vo);
+	}
 
 }

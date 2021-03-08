@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 조회</title>
+<title>게시물 수정</title>
 </head>
 <body>
 	<form method="post">
 		<table>
 			<tr>
 				<td><label>제목</label></td>
-				<td><input type="text" name="title" value="${board.title}"/><br /></td>
+				<td><input type="text" name="title" value="${board.title}" /><br /></td>
 			</tr>
 			<tr>
 				<td><label>작성자</label></td>
@@ -21,7 +21,7 @@
 				<td><textarea rows="5" cols="50"  name="content" >${board.content}</textarea><br /></td>
 			</tr>
 			<tr style="text-align:center;">
-				<td colspan="2"><a href="/board/modify?bno=${board.bno}">수정</a></td>
+				<td colspan="2"><button type="submit">수정</button></td>
 			</tr>
 		</table>
 	</form>

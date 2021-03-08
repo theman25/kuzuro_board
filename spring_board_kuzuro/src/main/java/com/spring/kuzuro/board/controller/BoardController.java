@@ -41,12 +41,33 @@ public class BoardController {
 		boardService.writeBoard(vo);
 		return "redirect:/board/list";
 	}
-	
+
 	// 게시물 조회
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void getBoard(@RequestParam("bno") int bno, Model model) throws Exception {
 		// @RequestParam([문자열])을 이용하면, 주소에 있는 특정한 값을 가져올 수 있습니다.
+		// 조회수 증가
+		boardService.updateViewCnt(bno);
+		// 게시물 조회
 		BoardVO vo = boardService.getBoard(bno);
 		model.addAttribute("board", vo);
 	}
+	
+	// 게시물 수정 화면 이동
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public void getModify(@RequestParam("bno") int bno, Model model) throws Exception {
+		BoardVO vo = boardService.getBoard(bno);
+		model.addAttribute("board", vo);
+	}
+	
+	// 게시물 수정
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String modifyBoard(BoardVO vo) throws Exception {
+		// Query String Parameters : bno : 1
+		// Form Data : title : 제목, writer : 작성자, content : 내용
+		//System.out.println("bno : " + vo.getBno());
+		boardService.modifyBoard(vo);
+		return "redirect:/board/view?bno=" + vo.getBno();
+	}
+	
 }

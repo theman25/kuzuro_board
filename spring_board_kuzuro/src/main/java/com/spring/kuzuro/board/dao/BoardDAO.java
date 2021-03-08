@@ -12,4 +12,8 @@ public interface BoardDAO {
 	public void writeBoard(BoardVO vo) throws Exception;
 	// 게시물 조회
 	public BoardVO getBoard(int bno) throws Exception;
+	// 조회수 증가
+	public void updateViewCnt(int bno) throws Exception;
+	// 게시물 수정
+	public void modifyBoard(BoardVO vo) throws Exception;
 }
