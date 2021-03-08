@@ -25,7 +25,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writeBoard(BoardVO vo) throws Exception{
 		boardDao.writeBoard(vo);
-		
+	}
+	// 게시물 조회
+	@Override
+	public BoardVO getBoard(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.getBoard(bno);
 	}
 
 }

@@ -10,4 +10,6 @@ public interface BoardService {
 	public List<BoardVO> getBoardList() throws Exception;
 	// 게시물 작성
 	public void writeBoard(BoardVO vo) throws Exception;
+	// 게시물 조회
+	public BoardVO getBoard(int bno) throws Exception;
 }
