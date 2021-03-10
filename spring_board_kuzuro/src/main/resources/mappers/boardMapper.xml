@@ -5,8 +5,10 @@
 
 	<!-- 게시물 목록 -->
 	<select id="list" resultType="com.spring.kuzuro.board.domain.BoardVO">
-		select 	bno, title, content, writer, regDate, viewCnt
+		select  bno, title, content, writer, regDate, viewCnt
 		from 	tbl_board
+		order by bno desc
+		limit 	10
 	</select>
 	
 	<!-- 게시물 작성 -->
@@ -44,4 +46,18 @@
 				tbl_board
 		where 	bno = #{bno}
 	</delete>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		select 	count(bno)
+		from 	tbl_board
+	</select>
+	
+	<!-- 게시물 목록 조회 + 페이징 -->
+	<select id="listPage" parameterType="hashMap" resultType="com.spring.kuzuro.board.domain.BoardVO">
+		select  bno, title, content, writer, regDate, viewCnt
+		from 	tbl_board
+		order by bno desc
+		limit 	#{displayPost}, #{postNum}
+	</select>
 </mapper>

@@ -18,4 +18,8 @@ public interface BoardDAO {
 	public void modifyBoard(BoardVO vo) throws Exception;
 	// 게시물 삭제
 	public void deleteBoard(int bno) throws Exception;
+	// 게시물 총 갯수
+	public int getCountBoard() throws Exception;
+	// 게시물 목록 조회 + 페이징
+	public List<BoardVO> getBoardListPage(int displayPost, int postNum) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.spring.kuzuro.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,6 +50,21 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void deleteBoard(int bno) throws Exception {
 		sqlSession.delete(namespace + ".delete", bno);
+	}
+	// 게시물 총 갯수
+	@Override
+	public int getCountBoard() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".count");
+	}
+	// 게시물 목록 조회 + 페이징
+	@Override
+	public List<BoardVO> getBoardListPage(int displayPost, int postNum) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSession.selectList(namespace + ".listPage", data);
 	}
 
 }

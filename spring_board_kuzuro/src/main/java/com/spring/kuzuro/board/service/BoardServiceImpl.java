@@ -48,5 +48,17 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDao.deleteBoard(bno);
 	}
+	// 게시물 총 갯수
+	@Override
+	public int getCountBoard() throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.getCountBoard();
+	}
+	// 게시물 목록 조회 + 페이징
+	@Override
+	public List<BoardVO> getBoardListPage(int displayPost, int postNum) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardListPage(displayPost, postNum);
+	}
 
 }
