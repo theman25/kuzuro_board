@@ -42,5 +42,11 @@ public class BoardServiceImpl implements BoardService {
 	public void modifyBoard(BoardVO vo) throws Exception{
 		boardDao.modifyBoard(vo);
 	}
+	// 게시물 삭제
+	@Override
+	public void deleteBoard(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		boardDao.deleteBoard(bno);
+	}
 
 }

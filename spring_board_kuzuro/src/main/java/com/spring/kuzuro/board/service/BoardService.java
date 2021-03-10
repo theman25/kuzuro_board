@@ -16,4 +16,6 @@ public interface BoardService {
 	public void updateViewCnt(int bno) throws Exception;
 	// 게시물 수정
 	public void modifyBoard(BoardVO vo) throws Exception;
+	// 게시물 삭제
+	public void deleteBoard(int bno) throws Exception;
 }

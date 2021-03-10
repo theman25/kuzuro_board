@@ -26,6 +26,7 @@
 			</tr>
 			<tr style="text-align:center;">
 				<td colspan="2"><a href="/board/modify?bno=${board.bno}">수정</a></td>
+				<td colspan="2"><a href="/board/delete?bno=${board.bno}">삭제</a></td>
 			</tr>
 		</table>
 	</form>
