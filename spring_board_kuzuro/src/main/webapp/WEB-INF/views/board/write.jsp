@@ -6,6 +6,10 @@
 <title>게시물 작성</title>
 </head>
 <body>
+	<div id="nav">
+		<%@ include file="../include/nav.jsp" %>
+	</div>
+
 	<form method="post">
 		<table>
 			<tr>
