@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.kuzuro.board.domain.BoardVO;
 import com.spring.kuzuro.board.domain.Page;
+import com.spring.kuzuro.board.domain.ReplyVO;
 import com.spring.kuzuro.board.service.BoardService;
+import com.spring.kuzuro.board.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -20,6 +22,9 @@ public class BoardController {
 
 	@Inject
 	private BoardService boardService;
+	
+	@Inject
+	private ReplyService replyService;
 	
 	// 게시물 목록 조회
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -52,6 +57,11 @@ public class BoardController {
 		// 게시물 조회
 		BoardVO vo = boardService.getBoard(bno);
 		model.addAttribute("board", vo);
+		
+		// 댓글 조회
+		List<ReplyVO> replyList = null;
+		replyList = replyService.getReplyList(bno);
+		model.addAttribute("replyList", replyList);
 	}
 	
 	// 게시물 수정 화면 이동
@@ -75,7 +85,7 @@ public class BoardController {
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteBoard(int bno) throws Exception {
 		boardService.deleteBoard(bno);
-		return "redirect:/board/list";
+		return "redirect:/board/listPageSearch?num=1";
 	}
 	
 	// 게시물 목록 조회 + 페이징 추가
@@ -141,7 +151,7 @@ public class BoardController {
 		*/
 	}
 	
-	// 게시물 목록 조회 + 페이징 추가
+	// 게시물 목록 조회 + 페이징 + 검색
 	@RequestMapping(value="/listPageSearch", method=RequestMethod.GET)
 	public void getBoardListPageSearch(Model model, @RequestParam("num") int num, 
 			@RequestParam(value="searchType", required = false, defaultValue="title") String searchType, 
