@@ -66,5 +66,26 @@ public class BoardDAOImpl implements BoardDAO {
 		data.put("postNum", postNum);
 		return sqlSession.selectList(namespace + ".listPage", data);
 	}
+	// 게시물 목록 조회 + 페이징 + 검색
+	@Override
+	public List<BoardVO> getBoardListPageSearch(int displayPost, int postNum, String searchType, String keword)
+			throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("searchType", searchType);
+		data.put("keword", keword);
+		return sqlSession.selectList(namespace + ".listPageSearch", data);
+	}
+	// 게시물 총 갯수 + 검색
+	@Override
+	public int getBoardCountSearch(String searchType, String keword) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, String> data = new HashMap<String, String>();
+		data.put("searchType", searchType);
+		data.put("keword", keword);
+		return sqlSession.selectOne(namespace + ".countSearch", data);
+	}
 
 }

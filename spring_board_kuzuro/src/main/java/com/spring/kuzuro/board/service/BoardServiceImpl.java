@@ -60,5 +60,18 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.getBoardListPage(displayPost, postNum);
 	}
+	// 게시물 목록 조회 + 페이징 + 검색
+	@Override
+	public List<BoardVO> getBoardListPageSearch(int displayPost, int postNum, String searchType, String keword)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardListPageSearch(displayPost, postNum, searchType, keword);
+	}
+	// 게시물 총 갯수 + 검색
+	@Override
+	public int getBoardCountSearch(String searchType, String keword) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardCountSearch(searchType, keword);
+	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -139,5 +140,24 @@ public class BoardController {
 		// 현재페이지
 		model.addAttribute("select", num);
 		*/
+	}
+	
+	// 게시물 목록 조회 + 페이징 추가
+	@RequestMapping(value="/listPageSearch", method=RequestMethod.GET)
+	public void getBoardListPageSearch(Model model, @RequestParam("num") int num, 
+			@RequestParam(value="searchType", required = false, defaultValue="title") String searchType, 
+			@RequestParam(value="keyword", required = false, defaultValue="") String keyword) throws Exception {
+		Page page = new Page();
+		
+		page.setNum(num);
+		page.setCount(boardService.getBoardCountSearch(searchType, keyword));
+		
+		List<BoardVO> boardList = null;
+		boardList = boardService.getBoardListPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num);
+		
 	}
 }

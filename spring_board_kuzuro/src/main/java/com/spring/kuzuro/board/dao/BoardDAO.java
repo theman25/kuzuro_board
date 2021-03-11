@@ -22,4 +22,8 @@ public interface BoardDAO {
 	public int getCountBoard() throws Exception;
 	// 게시물 목록 조회 + 페이징
 	public List<BoardVO> getBoardListPage(int displayPost, int postNum) throws Exception;
+	// 게시물 목록 조회 + 페이징 + 검색
+	public List<BoardVO> getBoardListPageSearch(int displayPost, int postNum, String searchType, String keword) throws Exception;
+	// 게시물 총 갯수 + 검색
+	public int getBoardCountSearch(String searchType, String keword) throws Exception;
 }
