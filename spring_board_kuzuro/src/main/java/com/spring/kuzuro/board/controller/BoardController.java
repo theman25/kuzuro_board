@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -152,12 +151,21 @@ public class BoardController {
 		page.setNum(num);
 		page.setCount(boardService.getBoardCountSearch(searchType, keyword));
 		
+		// 검색타입과 검색어
+		//page.setSearchTypeKeyword(searchType, keyword);
+		page.setSearchType(searchType);
+		page.setKeyword(keyword);
+		
 		List<BoardVO> boardList = null;
+		//boardList = boardService.getBoardListPage(page.getDisplayPost(), page.getPostNum());
 		boardList = boardService.getBoardListPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);
+		// 검색조건 유지를 위해
+		//model.addAttribute("searchType", searchType);
+		//model.addAttribute("keyword", keyword);
 		
 	}
 }

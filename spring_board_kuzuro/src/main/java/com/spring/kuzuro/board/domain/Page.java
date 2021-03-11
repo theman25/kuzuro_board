@@ -51,4 +51,30 @@ public class Page {
 		
 		displayPost = (num - 1) * postNum;
 	}
+	/*
+	// 검색타입과 검색어
+	@Getter private String searchTypeKeyword;
+	
+	public void setSearchTypeKeyword(String searchType, String keyword) {
+		if(searchType.equals("") || keyword.equals("")) {
+			searchTypeKeyword = "";
+		}
+		else {
+			searchTypeKeyword = "&searchType=" + searchType + "&keyword=" + keyword;
+		}
+	}
+	*/
+	//private String searchTypeKeyword;
+	
+	public String getSearchTypeKeyword() {
+		if(searchType.equals("") || keyword.equals("")) {
+			return "";
+		}
+		else {
+			return "&searchType=" + searchType + "&keyword=" + keyword;
+		}
+	}
+	
+	@Getter @Setter private String searchType;
+	@Getter @Setter private String keyword;
 }
