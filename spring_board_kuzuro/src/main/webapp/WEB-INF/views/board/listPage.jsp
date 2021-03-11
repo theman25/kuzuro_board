@@ -40,13 +40,14 @@
 		</tbody>
 	</table>
 	
+	<!-- 페이징 -->
 	<div>
-		<c:if test="${prev}">
+		<c:if test="${page.prev}">
 			<span>
-				<a href="/board/listPage?num=${startPageNum - 1}">[이전]</a>
+				<a href="/board/listPage?num=${page.startPageNum - 1}">[이전]</a>
 			</span>
 		</c:if>
-		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+		<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
 			<span>
 				<c:if test="${select != num}">
 					<a href="/board/listPage?num=${num}">${num}</a>
@@ -56,9 +57,9 @@
 				</c:if>
 			</span>
 		</c:forEach>
-		<c:if test="${next}">
+		<c:if test="${page.next}">
 			<span>
-				<a href="/board/listPage?num=${endPageNum + 1}">[다음]</a>
+				<a href="/board/listPage?num=${page.endPageNum + 1}">[다음]</a>
 			</span>
 		</c:if>
 		<%-- 

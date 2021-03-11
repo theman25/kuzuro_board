@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.kuzuro.board.domain.BoardVO;
+import com.spring.kuzuro.board.domain.Page;
 import com.spring.kuzuro.board.service.BoardService;
 
 @Controller
@@ -80,6 +81,29 @@ public class BoardController {
 	// 게시물 목록 조회 + 페이징 추가
 	@RequestMapping(value="/listPage", method=RequestMethod.GET)
 	public void getBoardListPage(Model model, @RequestParam("num") int num) throws Exception {
+		Page page = new Page();
+		
+		page.setNum(num);
+		page.setCount(boardService.getCountBoard());
+		
+		List<BoardVO> boardList = null;
+		boardList = boardService.getBoardListPage(page.getDisplayPost(), page.getPostNum());
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("page", page);
+		/*
+		model.addAttribute("pageNum", page.getPageNum());
+		// 시작번호/끝번호
+		model.addAttribute("startPageNum", page.getStartPageNum());
+		model.addAttribute("endPageNum", page.getEndPageNum());
+		// 이전/다음
+		model.addAttribute("prev", page.isPrev());
+		model.addAttribute("next", page.isNext());
+		*/
+		// 현재페이지
+		model.addAttribute("select", num);
+		
+		/*
 		// 게시물 총 갯수
 		int count = boardService.getCountBoard();
 		// 한 페이지에 출력할 게시물 갯수
@@ -114,5 +138,6 @@ public class BoardController {
 		model.addAttribute("next", next);
 		// 현재페이지
 		model.addAttribute("select", num);
+		*/
 	}
 }
