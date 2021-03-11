@@ -12,8 +12,8 @@
 	
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.spring.kuzuro.board.domain.ReplyVO">
-		insert into (bno, writer, content, regDate)
-		value 		(#{bno}, #{writer}, #{content}, #{regDate})
+		insert into tbl_reply 	(bno, writer, content, regDate)
+		value 					(#{bno}, #{writer}, #{content}, SYSDATE())
 	</insert>
 	
 	<!-- 댓글 수정 -->

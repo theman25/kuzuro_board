@@ -10,6 +10,7 @@
 		<%@ include file="../include/nav.jsp" %>
 	</div>
 
+	<!-- action을 지정하지 않았을 경우, 현재의 url로 데이터를 보냄 -->
 	<form method="post">
 		<table>
 			<tr>
