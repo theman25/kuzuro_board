@@ -82,8 +82,9 @@
 	
 	<!-- 게시물 목록 조회 + 페이징 + 검색 -->
 	<select id="listPageSearch" parameterType="hashMap" resultType="com.spring.kuzuro.board.domain.BoardVO">
-		select  bno, title, content, writer, regDate, viewCnt
-		from 	tbl_board
+		select  bno, title, content, writer, regDate, viewCnt,
+				(select count(rno) from tbl_reply where bno = b.bno) replyCnt
+		from 	tbl_board b
 		<if test='searchType.equals("title")'>
 		where title like concat('%', #{keword}, '%')
 		</if>

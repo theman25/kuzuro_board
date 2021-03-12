@@ -6,8 +6,10 @@ import com.spring.kuzuro.board.domain.ReplyVO;
 
 public interface ReplyService {
 	
-	// 댓글 조회
+	// 댓글 목록 조회
 	public List<ReplyVO> getReplyList(int bno) throws Exception;
+	// 댓글 목록 조회
+	public ReplyVO getReply(int bno, int rno) throws Exception;
 	// 댓글 작성
 	public void writeReply(ReplyVO vo) throws Exception;
 	// 댓글 수정

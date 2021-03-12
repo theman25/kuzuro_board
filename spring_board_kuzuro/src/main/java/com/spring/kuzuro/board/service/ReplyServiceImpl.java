@@ -15,11 +15,17 @@ public class ReplyServiceImpl implements ReplyService {
 	@Inject
 	ReplyDAO replyDao;
 	
-	// 댓글 조회
+	// 댓글 목록 조회
 	@Override
 	public List<ReplyVO> getReplyList(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		return replyDao.getReplyList(bno);
+	}
+	// 댓글 조회
+	@Override
+	public ReplyVO getReply(int bno, int rno) throws Exception {
+		// TODO Auto-generated method stub
+		return replyDao.getReply(bno, rno);
 	}
 	// 댓글 작성
 	@Override

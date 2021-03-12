@@ -173,6 +173,7 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);
+		System.out.println("boardList : " + boardList);
 		// 검색조건 유지를 위해
 		//model.addAttribute("searchType", searchType);
 		//model.addAttribute("keyword", keyword);

@@ -1,6 +1,8 @@
 package com.spring.kuzuro.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,30 +19,39 @@ public class ReplyDAOImpl implements ReplyDAO {
 	
 	private static String namespace = "com.spring.kuzuro.mapper.reply";
 	
-	// 댓글 조회
+	// 댓글 목록 조회
 	@Override
 	public List<ReplyVO> getReplyList(int bno) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace + ".replyList", bno);
+		return sqlSession.selectList(namespace + ".list", bno);
+	}
+	// 댓글 조회
+	@Override
+	public ReplyVO getReply(int bno, int rno) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Integer> data = new HashMap<String, Integer>();
+		data.put("bno", bno);
+		data.put("rno", rno);
+		return sqlSession.selectOne(namespace + ".view", data);
 	}
 	// 댓글 작성
 	@Override
 	public void writeReply(ReplyVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert(namespace + ".replyWrite", vo);
+		sqlSession.insert(namespace + ".write", vo);
 	}
 	// 댓글 수정
 	@Override
 	public void modifyReply(ReplyVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace + ".replyModify", vo);
+		sqlSession.update(namespace + ".modify", vo);
 		
 	}
 	// 댓글 삭제
 	@Override
 	public void deleteReply(ReplyVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.delete(namespace + ".replyDelete", vo);
+		sqlSession.delete(namespace + ".delete", vo);
 		
 	}
 
