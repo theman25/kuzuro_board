@@ -3,6 +3,7 @@ package com.spring.kuzuro.board.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,11 @@ public class BoardController {
 	
 	// 게시물 작성 화면 이동
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public void getBoardWrite() throws Exception{
-		
+	public void getBoardWrite(HttpSession session, Model model) throws Exception{
+		Object loginInfo = session.getAttribute("member");
+		if(loginInfo == null) {
+			model.addAttribute("msg", false);
+		}
 	}
 	
 	// 게시물 작성
@@ -54,6 +58,7 @@ public class BoardController {
 		// @RequestParam([문자열])을 이용하면, 주소에 있는 특정한 값을 가져올 수 있습니다.
 		// 조회수 증가
 		boardService.updateViewCnt(bno);
+		
 		// 게시물 조회
 		BoardVO vo = boardService.getBoard(bno);
 		model.addAttribute("board", vo);
@@ -173,7 +178,7 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);
-		System.out.println("boardList : " + boardList);
+		//System.out.println("boardList : " + boardList);
 		// 검색조건 유지를 위해
 		//model.addAttribute("searchType", searchType);
 		//model.addAttribute("keyword", keyword);
