@@ -23,6 +23,12 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		sqlSession.insert(namespace + ".regist", vo);
 	}
+	// 아이디 중복 체크
+	@Override
+	public MemberVO checkId(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".checkId", userId);
+	}
 	// 회원 목록 조회
 	@Override
 	public List<MemberVO> getMemberList(int displayPost, int postNum, 

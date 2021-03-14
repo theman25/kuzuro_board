@@ -21,6 +21,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDao.insertMember(vo);
 	}
+	// 아이디 중복 체크
+	@Override
+	public MemberVO checkId(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.checkId(userId);
+	}
 	// 회원 목록 조회
 	@Override
 	public List<MemberVO> getMemberList(int displayPost, int postNum, String searchType, String keyword)

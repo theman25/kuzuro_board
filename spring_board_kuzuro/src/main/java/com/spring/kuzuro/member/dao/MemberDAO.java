@@ -8,6 +8,8 @@ public interface MemberDAO {
 
 	// 회원 등록
 	public void insertMember(MemberVO vo) throws Exception;
+	// 아이디 중복 체크
+	public MemberVO checkId(String userId) throws Exception;
 	// 회원 목록 조회
 	public List<MemberVO> getMemberList(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	// 회원 총 명수

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.kuzuro.board.domain.Page;
@@ -36,6 +36,18 @@ public class MemberController {
 	public String insertMember(@ModelAttribute MemberVO vo) throws Exception {
 		memberService.insertMember(vo);
 		return "redirect:/member/list?num=1";
+	}
+	// 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	public int checkId(HttpServletRequest request) throws Exception {
+		String userId = request.getParameter("userId");
+		MemberVO checkId = memberService.checkId(userId);
+		int result = 0;
+		if(checkId != null) {
+			result = 1;
+		}
+		return result;
 	}
 	// 회원 목록 조회
 	@RequestMapping(value = "list", method = RequestMethod.GET)

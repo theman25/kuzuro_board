@@ -42,9 +42,9 @@
 		</choose>
 	</sql>
 	
-	<!-- 회원 조회 -->
-	<select id="selectOne" parameterType="String" resultType="com.spring.kuzuro.member.domain.MemberVO">
-		select 	userId, userPw, userNm, regDate
+	<!-- 아이디 확인 -->
+	<select id="checkId" parameterType="String" resultType="com.spring.kuzuro.member.domain.MemberVO">
+		select 	userId
 		from 	tbl_member
 		where 	userId = #{userId}
 	</select>
@@ -72,5 +72,4 @@
 		and 	userPw = #{userPw}
 	</select>
 	
-	<!-- 로그 아웃 처리 -->
 </mapper>

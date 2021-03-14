@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 </head>
 <body>
 <div class="container">
@@ -21,7 +22,13 @@
 				<div class="col-sm-3">
 					<input type="text" name="userId" id="userId" class="form-control" />
 				</div>
+				<div class="col-sm-3">
+					<button type="button" id="btnCheckId" class="btn btn-default" >아이디 확인</button>
+				</div>
 			</div>
+					<p class="result">
+						<span class="msg">아이디를 입력해주세요.</span>
+					</p>
 			<div class="form-group">
 				<label for="userPw" class="col-sm-4 control-label">패스워드</label>
 				<div class="col-sm-3">
@@ -49,4 +56,29 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript">
+	$("#btnCheckId").click(function(){
+		var query = {userId : $("#userId").val()};
+		$.ajax({
+			url : "/member/checkId",
+			type : "post",
+			data : query,
+			success : function(data){
+				console.log("data : " + data);
+				if(data == 1){
+					$(".result .msg").text("사용 불가");
+					$(".result .msg").attr("style", "color:#f00");
+				} else {
+					$(".result .msg").text("사용 가능");
+					$(".result .msg").attr("style", "color:#00f");
+				}
+			},
+			error : function(request,status,error){
+				console.log("code : " + request.status + "\n"
+							+ "message : " + request.responseText + "\n"
+							+ "error : " + error);
+			}
+		});
+	});
+</script>
 </html>

@@ -36,6 +36,11 @@
 					<input type="text" name="userNm" id="userNm" class="form-control" value="${member.userNm}" />
 				</div>
 			</div>
+			<c:if test="${msg == false}">
+				<p style="color:#f00; text-align:center;">
+					패스워드가 일치하지 않습니다. 패스워드를 확인 해주세요.
+				</p>
+			</c:if>
 			<div class="form-group">
 				<div style="text-align:center;">
 					<button type="submit" class="btn btn-success">회원 정보 수정</button>
