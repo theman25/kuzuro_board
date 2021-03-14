@@ -17,6 +17,8 @@
 		</c:if>
 		<c:if test="${member != null}">
 			<li><a href="/member/logout">로그아웃</a></li>
+			<li><a href="/member/update">회원 정보 수정</a></li>
+			<li><a href="/member/withdrawal">회원 탈퇴</a></li>
 		</c:if>
 	</ul>
 	<ul class="nav nav-pills">

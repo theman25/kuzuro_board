@@ -52,17 +52,11 @@
 	<!-- 회원 정보 수정 -->
 	<update id="update" parameterType="com.spring.kuzuro.member.domain.MemberVO">
 		update 	tbl_member
-		set 	userNm = #{userNm}
+		set 	userNm = #{userNm},
+				userPw = #{userPw}
 		where 	userId = #{userId}
 	</update>
-	
-	<!-- 비밀번호 변경 -->
-	<update id="updatePw" parameterType="com.spring.kuzuro.member.domain.MemberVO">
-		update 	tbl_member
-		set 	userPw = #{userPw}
-		where 	userId = #{userId}
-	</update>
-	
+
 	<!-- 회원 삭제 -->
 	<delete id="delete" parameterType="String">
 		delete 

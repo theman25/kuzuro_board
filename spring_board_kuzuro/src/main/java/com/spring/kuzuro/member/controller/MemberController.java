@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,7 @@ import com.spring.kuzuro.member.service.MemberService;
 public class MemberController {
 
 	@Inject
-	private MemberService memberServic;
+	private MemberService memberService;
 	
 	// 회원 가입 화면 이동
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
@@ -33,7 +34,7 @@ public class MemberController {
 	// 회원 가입
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String insertMember(@ModelAttribute MemberVO vo) throws Exception {
-		memberServic.insertMember(vo);
+		memberService.insertMember(vo);
 		return "redirect:/member/list?num=1";
 	}
 	// 회원 목록 조회
@@ -43,14 +44,14 @@ public class MemberController {
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception {
 		Page page = new Page();
 		page.setNum(num);
-		int count = memberServic.getMemberCount(searchType, keyword);
+		int count = memberService.getMemberCount(searchType, keyword);
 		page.setCount(count);
 		// 검색타입과 검색어
 		page.setSearchType(searchType);
 		page.setKeyword(keyword);
 		
 		List<MemberVO> memberList = null;
-		memberList = memberServic.getMemberList(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		memberList = memberService.getMemberList(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("page", page);
@@ -59,31 +60,46 @@ public class MemberController {
 	// 회원 정보 조회
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public void getMember(@RequestParam("userId") String userId, Model model) throws Exception {
-		MemberVO vo = memberServic.getMember(userId);
+		MemberVO vo = memberService.getMember(userId);
 		model.addAttribute("member", vo);
 	}
 	// 회원 정보 수정 화면 이동
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public void goMemberView(@RequestParam("userId") String userId, Model model) throws Exception {
-		MemberVO vo = memberServic.getMember(userId);
-		model.addAttribute("member", vo);
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public void goUpdateMember() throws Exception {
+		
 	}
 	// 회원 정보 수정
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateMember(MemberVO vo) throws Exception {
-		memberServic.updateMember(vo);
-		return "redirect:/member/view?userId=" + vo.getUserId();
+	public String updateMember(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
+		MemberVO memberVo = memberService.login(vo);
+		if(memberVo == null) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/update";
+		}
+		else {
+			memberService.updateMember(vo);
+			session.setAttribute("member", memberService.getMember(vo.getUserId()));
+			return "redirect:/";
+		}
 	}
-	// 비밀 번호 변경
-	@RequestMapping(value = "/updatePw", method = RequestMethod.POST)
-	public String updateMemberPw(MemberVO vo) throws Exception {
-		memberServic.updateMemberPw(vo);
-		return "redirect:/member/view?userId=" + vo.getUserId();
+	// 회원 정보 수정 화면 이동
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
+	public void goWithdrawalMember() throws Exception {
+		
 	}
 	// 회원 정보 삭제
-	public String deleteMember(@RequestParam("userId") String userId) throws Exception {
-		memberServic.deleteMember(userId);
-		return "redirect:/member/list?num=1";
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
+	public String deleteMember(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
+		MemberVO memberVo = memberService.login(vo);
+		if(memberVo == null) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/delete";
+		}
+		else {
+			memberService.deleteMember(vo.getUserId());
+			session.invalidate();
+			return "redirect:/";
+		}		
 	}
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -94,7 +110,7 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
 		HttpSession session = request.getSession();
-		MemberVO memberVo = memberServic.login(vo);
+		MemberVO memberVo = memberService.login(vo);
 		if(memberVo == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
