@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.kuzuro.mapper.reply">
+<mapper namespace="com.kuzuro.board.mapper.reply">
 	
 	<!-- 댓글 목록 조회 -->
-	<select id="list" parameterType="int" resultType="com.spring.kuzuro.board.domain.ReplyVO">
+	<select id="list" parameterType="int" resultType="com.kuzuro.board.board.domain.ReplyVO">
 		select 	rno, bno, writer, content, regDate
 		from 	tbl_reply
 		where 	bno = #{bno}
 	</select>
 	
 	<!-- 댓글 조회 -->
-	<select id="view" parameterType="hashMap" resultType="com.spring.kuzuro.board.domain.ReplyVO">
+	<select id="view" parameterType="hashMap" resultType="com.kuzuro.board.board.domain.ReplyVO">
 		select 	rno, bno, writer, content, regDate
 		from 	tbl_reply
 		where 	bno = #{bno}
@@ -19,13 +19,13 @@
 	</select>
 	
 	<!-- 댓글 작성 -->
-	<insert id="write" parameterType="com.spring.kuzuro.board.domain.ReplyVO">
+	<insert id="write" parameterType="com.kuzuro.board.board.domain.ReplyVO">
 		insert into tbl_reply 	(bno, writer, content, regDate)
 		value 					(#{bno}, #{writer}, #{content}, SYSDATE())
 	</insert>
 	
 	<!-- 댓글 수정 -->
-	<update id="modify" parameterType="com.spring.kuzuro.board.domain.ReplyVO">
+	<update id="modify" parameterType="com.kuzuro.board.board.domain.ReplyVO">
 		update 	tbl_reply
 		set 	writer = #{writer},
 				content = #{content}
@@ -34,7 +34,7 @@
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="delete" parameterType="com.spring.kuzuro.board.domain.ReplyVO">
+	<delete id="delete" parameterType="com.kuzuro.board.board.domain.ReplyVO">
 		delete from tbl_reply
 		where 	rno = #{rno}
 		and 	bno = #{bno}

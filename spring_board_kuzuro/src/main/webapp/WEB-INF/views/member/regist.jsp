@@ -43,7 +43,7 @@
 			</div>
 			<div class="form-group">
 				<div style="text-align:center;">
-					<button type="submit" class="btn btn-success">회원 가입</button>
+					<button type="submit" class="btn btn-success" id="submit" disabled="disabled">회원 가입</button>
 					<!-- <a href="javascript:history.back();" class="btn btn-default">취소</a> -->
 					<a href="/" class="btn btn-default">처음으로</a>
 				</div>
@@ -68,9 +68,11 @@
 				if(data == 1){
 					$(".result .msg").text("사용 불가");
 					$(".result .msg").attr("style", "color:#f00");
+					$("#submit").attr("disabled", "disabled");
 				} else {
 					$(".result .msg").text("사용 가능");
 					$(".result .msg").attr("style", "color:#00f");
+					$("#submit").removeAttr("disabled");
 				}
 			},
 			error : function(request,status,error){
